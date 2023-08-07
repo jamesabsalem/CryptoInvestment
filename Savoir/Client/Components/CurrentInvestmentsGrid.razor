@@ -1,0 +1,65 @@
+﻿<h6 style="padding-left: 35px; padding-top: 20px">Current Investments</h6>
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Exchange</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Deposit Rate</th>
+                        <th class="text-center text-sm font-weight-normal" style="color: #343a40">30 Day Trend</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Term</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Start Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">End Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Maturity Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Invested Amount</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Return to Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Investments != null)
+                    {
+                        @foreach (var investment in Investments)
+                        {
+                            <tr>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.Exchange</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.DepositRate</td>
+                                <td class="text-center text-sm font-weight-normal" style="color: #343a40;">Graph</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.Term</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.StartDate.ToShortDateString()</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">
+                                    @if (investment.EndDate != null)
+                                    {
+                                        @investment.EndDate.Value.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.MaturityDate.ToShortDateString()</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.InvestedAmount</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@investment.ReturnAmount</td>
+                                <td class="align-middle">
+                                    <a href="#" class="btn btn-outline-primary btn-sm" style="color: #6c757d;" data-toggle="tooltip" data-original-title="Edit user">
+                                        Withdraw
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-left text-sm font-weight-normal" style="color: #343a40">....No data</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <Pagination TotalPages="@(totalPages != 0 ? totalPages : 1)"
+                                PageIndex="@State.PageIndex"
+                                Radius="3"
+                                OnSelectedPage="@SelectedPage">
+                    </Pagination>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

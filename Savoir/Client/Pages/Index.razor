@@ -1,0 +1,11 @@
+﻿@page "/"
+@inject IJSRuntime JsRuntime;
+<HomeComponent />
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        await JsRuntime.InvokeVoidAsync("MainFunction");
+    }
+}
+

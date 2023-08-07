@@ -1,0 +1,134 @@
+﻿@page "/Confirm"
+@using System.Globalization
+
+
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive col-xl-12 ">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Market</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Deposit Rate</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Term</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-xl-2"></th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-xl-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (marketsOverView != null)
+                    {
+                        <tr>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Exchange</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.DepositRate</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Term</td>
+                            <td class="align-middle col-xl-1">
+                                <button class="text-secondary btn btn-outline-primary btn-sm">Selected</button>
+                            </td>
+                            <td class="align-middle col-xl-1">
+                                <button class="text-secondary btn btn-outline-primary btn-sm" @onclick="OnClickMarkeView">View All</button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Org</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Company</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Bank Account</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Currency</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Net Cash Flow</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (companyWise != null)
+                    {
+                        <tr>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.OrganiaztionName</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.CompanyName</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.BankAccount</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.Currency</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.NetCashFlow</td>
+                            <td class="align-middle">
+                                <button class="text-secondary btn btn-outline-primary btn-sm" @onclick="OnClickCompanyView">View All</button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<h6 class="p-1 pb-4 pt-4 font-weight-bold">Confirm Your Deposit Amount</h6>
+
+
+
+<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+    <div class="row">
+        <EditForm Model="@confirmSelection" OnValidSubmit="@OnValidSubmit">
+            <DataAnnotationsValidator />
+            <div class="col-sm-5 col-md-3 col-xl-3 col-lg-3 mb-3">
+                <div class="text-center pt-0">
+                    <div class="row">
+                        <div class="col-3">
+                            <h6 class="font-weight-normal">Deposit</h6>
+                        </div>
+                        <div class="col-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <InputText type="number" @bind-Value="confirmDepositAmount.Percentage" @oninput="OnChangeDeposit" class="form-control" id="Percentage" placeholder="%" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d"></InputText>
+                                    <ValidationMessage For="() => confirmDepositAmount.Percentage" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7 col-md-6 col-xl-6 col-lg-6 mb-6">
+                <div class="text-center pt-0">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="font-weight-normal">$ Equivalent</h6>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <InputText type="number" @bind-Value="confirmDepositAmount.Amount" @oninput="OnChangeAmount" class="form-control" id="Amount" placeholder="Amount" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d"></InputText>
+                                    <ValidationMessage For="() => confirmDepositAmount.Amount" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 pt-5">
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+
+    </div>
+</div>

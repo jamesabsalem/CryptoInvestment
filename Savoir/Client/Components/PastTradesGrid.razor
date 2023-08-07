@@ -1,0 +1,61 @@
+﻿
+<h6 style="padding-left: 35px; padding-top: 20px">Past Trades</h6>
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Exchange</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Deposit Rate</th>
+                        <th class="text-center text-sm font-weight-normal" style="color: #343a40">30 Day Trend</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Term</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Start Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">End Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Maturity Date</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Invested Amount</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40">Return to Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (PastTrades != null)
+                    {
+                        @foreach (var pastTrade in PastTrades)
+                        {
+                            <tr>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.Exchange</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.DepositRate</td>
+                                <td class="text-center text-sm font-weight-normal" style="color: #343a40;">Graph</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.Term</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.StartDate.ToShortDateString()</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">
+                                    @if (pastTrade.EndDate != null)
+                                    {
+                                        @pastTrade.EndDate.Value.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.MaturityDate.ToShortDateString()</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.InvestedAmount</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@pastTrade.ReturnAmount</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">....No data</td>
+                        </tr>
+                    }
+                </tbody>
+                 <tfoot>
+                    <Pagination TotalPages="@(totalPages != 0 ? totalPages : 1)"
+                                PageIndex="@State.PageIndex"
+                                Radius="3"
+                                OnSelectedPage="@SelectedPage">
+                    </Pagination>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

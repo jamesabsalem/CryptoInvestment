@@ -1,0 +1,99 @@
+﻿<h6 style="padding-left: 35px; padding-top: 20px">Organization Cash Forecast</h6>
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Organization</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Bank Account</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Currency</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Net Cash Flow</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (_cashFlows != null)
+                    {
+                        <tr>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@_cashFlows.OrganizationName</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@_cashFlows.BankAccount</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@_cashFlows.Currency</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@_cashFlows.NetCashFlow</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">....No data</td>
+                        </tr>
+                    }
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<h6 style="padding-left: 35px; padding-top: 20px">Company Cash Forecast</h6>
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Organization</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Company</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Bank Account</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Currency</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">Net Cash Flow</th>
+                        <th class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (_cashFlows != null)
+                    {
+                        
+                        @foreach (var cashFlow in _cashFlows.CompanyWise)
+                        {
+                            <tr>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@cashFlow.OrganiaztionName</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@cashFlow.CompanyName</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@cashFlow.BankAccount</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@cashFlow.Currency</td>
+                                <td class="text-left text-sm font-weight-bold" style="color: #343a40; padding-left: 24px">@cashFlow.NetCashFlow</td>
+                                <td class="align-middle">
+                                    <div class="dropdown">
+                                        <button class="btn bg-gradient-primary" @onclick="()=>OnClickArrow(cashFlow.CompanyId)" type="button">
+                                           @if(_status) {
+                                                <i class="fas fa-angle-up"></i>
+                                           } else {
+                                                <i class="fas fa-angle-down"></i>
+                                           }
+                                        </button>
+                                       
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr >
+                                <td colspan="6">
+                                    @if (_companyId == cashFlow.CompanyId && _status==true)
+                                    {
+                                        <CompanyWiseCashForecastComponent _companyId="@cashFlow.CompanyId"></CompanyWiseCashForecastComponent>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">....No data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

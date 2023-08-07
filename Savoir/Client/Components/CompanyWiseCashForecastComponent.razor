@@ -1,0 +1,40 @@
+﻿<div class="card col-10 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+    <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-left text-sm text-uppercase font-weight-normal" style="color: #343a40; padding-left: 24px"></th>
+                    @foreach (var item in _cashForecast.FirstOrDefault().Expence)
+                    {
+                        <th class="text-left text-sm text-uppercase font-weight-normal" style="color: #343a40; padding-left: 24px">@item.MonthYear</th>
+                    }
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in _cashForecast)
+                {
+                    <tr>
+                        <td class="text-left text-sm font-weight-normal">@item.Reason</td>
+                        @foreach(var expance in item.Expence) {
+                            if(expance.Amount <= 0){
+                                <td class="text-left text-sm font-weight-normal text-danger" style="padding-left: 24px">@expance.Amount</td>
+                            } else {
+                                <td class="text-left text-sm font-weight-normal" style="padding-left: 24px">@expance.Amount</td>
+                            } 
+                        }
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-left text-sm font-weight-bold">Net Cash Flow</td>
+                    @foreach (var item in _cashForecast.FirstOrDefault().Expence.OrderBy(x => x.Year).ThenBy(x => x.Month))
+                    {
+                        <td class="text-left text-sm font-weight-bold" style="padding-left: 24px">@Expence.Where(x => x.Year==item.Year && x.Month==item.Month).Sum( e => e.Amount)</td>
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

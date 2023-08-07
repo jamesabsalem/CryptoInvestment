@@ -1,0 +1,87 @@
+﻿<PageTitle>Savoir - Home</PageTitle>
+
+
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-10 col-xl-7 row">
+            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3">
+                <small class="mb-0 h6 bold">#Current Trade</small>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" disabled="disabled" value="@_currentTrade" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" aria-describedby="basic-addon2">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-4 col-xl-4">
+                <small class="mb-0 h6 font-weight-normal">Av Return - 12 Months</small>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" aria-describedby="basic-addon2" value="5.75%" disabled="disabled">
+                        <span class="input-group-text" style="color: green; background-color: #e9ecef"><i class="fa fad fa-sort-up"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 pt-5 row ">
+                <div class="dropdown">
+                    <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownInvestmentTerm" data-bs-toggle="dropdown" aria-expanded="false">
+                        Investment Term
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownInvestmentTerm">
+                        @if (_investmentTerms != null)
+                        {
+                            foreach (var investmentTerm in _investmentTerms)
+                            {
+                                <li><a class="dropdown-item text-sm font-weight-normal " style="color: #343a40" @onclick="() => onSelectInvestmentTerm(investmentTerm.TermId)">@investmentTerm.InvestmentTermDescription</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-2 col-xl-2 pt-5 row">
+                <div class="dropdown">
+                    <button class="btn bg-gradient-primary dropdown-toggle" type="button" id="dropdownPeriodFY" data-bs-toggle="dropdown" aria-expanded="false">
+                        Period FY
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if (_periodFy != null)
+                        {
+                            foreach (var item in _periodFy)
+                            {
+                                <li><a class="dropdown-item text-sm font-weight-normal" style="color: #343a40">@item</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-0 col-md-0 col-lg-2 col-xl-4"></div>
+        
+    </div>
+</div>
+
+
+<div class="row pt-3">
+    <div class="col-xl-12 col-sm-12 mb-xl-0 mb-12">
+        <div class="card">
+            <div class="card-body p-0">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-investment-tab" data-bs-toggle="tab" data-bs-target="#nav-investment" type="button" role="tab" aria-controls="nav-investment" aria-selected="true">Investment View</button>
+                        <button class="nav-link" id="nav-cash-flow-tab" data-bs-toggle="tab" data-bs-target="#nav-cash-flow" type="button" role="tab" aria-controls="nav-cash-flow" aria-selected="false">Cash Flow View</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-investment" role="tabpanel" aria-labelledby="nav-investment-tab">
+                        <InvestmentTab _terms="@_selectedTerm" />
+                    </div>
+                    <div class="tab-pane fade" id="nav-cash-flow" role="tabpanel" aria-labelledby="nav-cash-flow-tab">
+                        <CashFlowTab />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

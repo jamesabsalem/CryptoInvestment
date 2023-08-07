@@ -1,0 +1,155 @@
+﻿@page "/ReviewAndConfirm"
+@using System.Globalization
+
+
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive col-xl-12 ">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Market</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Deposit Rate</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Term</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (marketsOverView != null)
+                    {
+                        <tr>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Exchange</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.DepositRate</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Term</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3">No data</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Org</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Company</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Bank Account</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Currency</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Net Cash Flow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (companyWise != null)
+                    {
+                        <tr>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.OrganiaztionName</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.CompanyName</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.BankAccount</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.Currency</td>
+                            <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@companyWise.NetCashFlow</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">No data</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 pt-4">
+    <div class="row">
+        <div class="col-sm-5 col-md-5 col-xl-3 col-lg-3">
+            <div class="text-center pt-0">
+                <div class="row">
+                    <div class="col-4">
+                        <h6 class="font-weight-normal">Deposit</h6>
+                    </div>
+                    <div class="col-7 col-sm-7 col-md-7 col-xl-8 col-lg-8">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" disabled value="@confirmSelection.DepositPercentage.ToString()" class="form-control" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" aria-describedby="basic-addon2"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7 col-md-7 col-xl-5 col-lg-5">
+            <div class="text-center pt-0">
+                <div class="row">
+                    <div class="col-3">
+                        <h6 class="font-weight-normal">$ Equivalent</h6>
+                    </div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" disabled value="@confirmSelection.DepositAmount.ToString()" class="form-control" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7 col-md-7 col-xl-5 col-lg-5">
+            <div class="text-center pt-0">
+                <div class="row">
+                    <div class="col-3 text-left">
+                        <h6 class="font-weight-normal">Est Return</h6>
+                    </div>
+                    <div class="col-9">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" disabled value="@confirmSelection.DepositAmount.ToString()" class="form-control" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-md-5 col-xl-3 col-lg-3">
+            <div class="text-center pt-0">
+                <div class="row">
+                    <div class="col-3">
+                        <h6 class="font-weight-normal">Term</h6>
+                    </div>
+                    <div class="col-7 col-sm-7 col-md-7 col-xl-9 col-lg-9">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" disabled class="form-control" value="@_terms" style="height: 80px; font-size: xx-large; font-weight: bold; color: #6c757d" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-9">
+        <div class="col-5">
+        </div>
+        <div class="col-7">
+            <button type="button" @onclick="OnClickConfirm" class="btn bg-gradient-primary btn-lg col-6">Confirm</button>
+            <button type="button" @onclick="OnClickEdit" class="btn bg-gradient-secondary btn-lg col-4">Edit</button>
+        </div>
+    </div>
+    
+
+</div>
+

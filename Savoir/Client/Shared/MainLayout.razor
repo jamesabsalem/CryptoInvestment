@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+@using Blazored.Toast.Configuration
+
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <!-- Navbar -->
+    <NavBer />
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        @Body
+        <FooterArea />
+    </div>
+    <BlazoredToasts Position="ToastPosition.BottomRight"
+                    Timeout="3" />
+</main>

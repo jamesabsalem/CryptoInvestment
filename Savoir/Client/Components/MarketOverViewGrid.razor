@@ -1,0 +1,58 @@
+﻿
+<h6 style="padding-left: 35px; padding-top: 20px">Market Over View</h6>
+<div class="ct-example" style="position: relative;border: 2px solid #f5f7ff !important;border-bottom: none !important;padding: 1rem 1rem 2rem 1rem;margin-bottom: -1.25rem;">
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Exchange</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Product</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Deposit Rate</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Term</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Deposit Fee</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Withdrawal Fee</th>
+                        <th class="text-center text-sm font-weight-normal" style="color: #343a40">30 Day Trend</th>
+                        <th class="text-left text-sm font-weight-normal " style="color: #343a40">Savoir Score()</th>
+                        <th class="text-secondary opacity-7"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (MarketsOverView != null)
+                    {
+                        @foreach (var marketsOverView in MarketsOverView)
+                        {
+                            <tr>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Exchange</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.DepositRate</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px">@marketsOverView.Term</td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></td>
+                                <td class="text-left text-sm font-weight-normal" style="color: #343a40; padding-left: 24px"></td>
+
+                                <td class="align-middle">
+                                    <button class="btn btn-outline-primary btn-sm" @onclick="()=>OnClickDiposit(marketsOverView.LendingPlatformId,marketsOverView.TermId)" style="color: #6c757d;"> Deposit</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">....No data</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <Pagination TotalPages="@(totalPages != 0 ? totalPages : 1)"
+                                PageIndex="@State.PageIndex"
+                                Radius="3"
+                                OnSelectedPage="@SelectedPage">
+                    </Pagination>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

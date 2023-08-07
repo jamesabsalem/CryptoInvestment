@@ -13,7 +13,7 @@ Cryptocurrency investment offers an exciting opportunity to participate in a tra
 1. Visual Studio 2022
 3. SQL SERVER 2019
 4. Entity Framework
-5. Blzor Server
+5. Blazor Server
 
 ![login](login.png)
 ![login](dashboard.png)

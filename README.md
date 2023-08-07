@@ -1,5 +1,7 @@
-# Fevicol POS System
-Fevicol POS System - ASP.NET Web Form
+# Crypto investment
+Cryptocurrency investment offers potential for high returns but comes with high volatility. 
+Research thoroughly before investing, diversify your portfolio, and consider your risk tolerance. 
+Stay cautious of scams and stay informed about market trends. Only invest what you can afford to lose.
 
 # Features
 1. Login & Log out
